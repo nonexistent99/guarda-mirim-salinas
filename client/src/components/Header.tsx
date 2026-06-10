@@ -4,31 +4,37 @@ import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
-  { href: "#inicio", label: "Inicio", type: "anchor" as const },
-  { href: "#sobre", label: "Sobre", type: "anchor" as const },
-  { href: "#importancia", label: "Importancia", type: "anchor" as const },
-  { href: "#historia", label: "Historia", type: "anchor" as const },
-  { href: "#depoimentos", label: "Depoimentos", type: "anchor" as const },
-  { href: "/blog", label: "Blog", type: "route" as const },
+  { href: "#inicio", label: "Início", type: "anchor" as const },
+  { href: "#processo", label: "Processo", type: "anchor" as const },
+  { href: "#historia", label: "Linha do tempo", type: "anchor" as const },
+  { href: "#memorias", label: "Memórias", type: "anchor" as const },
+  { href: "#empresas", label: "Empresas", type: "anchor" as const },
+  { href: "#acervo", label: "Acervo", type: "anchor" as const },
   { href: "/galeria", label: "Galeria", type: "route" as const },
-  { href: "/inscricao", label: "Inscricao", type: "route" as const },
   { href: "#contato", label: "Contato", type: "anchor" as const },
 ];
 
 export default function Header() {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [location, setLocation] = useLocation();
+  const isHome = location === "/";
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setScrollY(window.scrollY);
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const headerState =
+    !isHome || isMobileMenuOpen || scrollY > 220
+      ? "solid"
+      : scrollY > 34
+        ? "soft"
+        : "hero";
+  const onHero = headerState === "hero";
 
   const scrollToSection = (href: string) => {
     setIsMobileMenuOpen(false);
@@ -36,114 +42,128 @@ export default function Header() {
     if (location !== "/" && href.startsWith("#")) {
       setLocation("/");
       window.setTimeout(() => {
-        const element = document.querySelector(href);
-        element?.scrollIntoView({ behavior: "smooth" });
+        document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
       }, 120);
       return;
     }
 
-    const element = document.querySelector(href);
-    element?.scrollIntoView({ behavior: "smooth" });
+    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-background/95 backdrop-blur-md shadow-md"
-          : "bg-transparent"
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+        headerState === "solid"
+          ? "border-b border-slate-200/80 bg-white/90 text-[#10264d] shadow-[0_14px_44px_rgba(15,23,42,0.08)] backdrop-blur-xl"
+          : headerState === "soft"
+            ? "bg-[#07152d]/42 text-white backdrop-blur-md"
+            : "bg-transparent text-white"
       }`}
     >
       <div className="container">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex h-20 items-center justify-between gap-6">
           <a
             href="#inicio"
-            onClick={e => {
-              e.preventDefault();
+            onClick={event => {
+              event.preventDefault();
               scrollToSection("#inicio");
             }}
-            className="flex items-center gap-3 group"
+            className="group flex min-w-0 items-center gap-3"
           >
-            <div className="w-12 h-12 rounded-full bg-gradient-primary flex items-center justify-center text-white font-bold text-xl shadow-lg">
-              GM
-            </div>
-            <div className="hidden sm:block">
-              <div className="font-bold text-lg text-foreground group-hover:text-primary transition-colors">
+            <span
+              className={`flex h-12 w-12 shrink-0 items-center justify-center border transition-all duration-500 ${
+                onHero
+                  ? "border-white/30 bg-white/10"
+                  : "border-[#10264d]/15 bg-[#10264d]"
+              }`}
+            >
+              <img
+                src="/logo-gm.svg"
+                alt="Guarda Mirim de Salinas"
+                className="h-9 w-9"
+              />
+            </span>
+            <span className="hidden min-w-0 sm:block">
+              <span className="block text-sm font-black uppercase tracking-[0.18em]">
                 Guarda Mirim
-              </div>
-              <div className="text-xs text-muted-foreground">de Salinas</div>
-            </div>
+              </span>
+              <span
+                className={`block text-xs transition-colors duration-500 ${
+                  onHero ? "text-white/72" : "text-slate-500"
+                }`}
+              >
+                Salinas, Minas Gerais
+              </span>
+            </span>
           </a>
 
-          <nav className="hidden lg:flex items-center gap-8">
-            {navLinks.map(link => {
-              const isActive = location === link.href;
-              return link.type === "route" ? (
+          <nav className="hidden items-center gap-5 lg:flex">
+            {navLinks.map(link =>
+              link.type === "route" ? (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`text-sm font-medium transition-colors relative group ${
-                    isActive
-                      ? "text-primary"
-                      : "text-foreground hover:text-primary"
+                  className={`relative text-sm font-bold transition-colors ${
+                    location === link.href
+                      ? "text-[#caa24a]"
+                      : onHero
+                        ? "text-white/80 hover:text-white"
+                        : "text-slate-700 hover:text-[#10264d]"
                   }`}
                 >
                   {link.label}
-                  <span
-                    className={`absolute bottom-0 left-0 h-0.5 bg-gradient-gold transition-all duration-300 ${
-                      isActive ? "w-full" : "w-0 group-hover:w-full"
-                    }`}
-                  />
                 </Link>
               ) : (
                 <a
                   key={link.href}
                   href={link.href}
-                  onClick={e => {
-                    e.preventDefault();
+                  onClick={event => {
+                    event.preventDefault();
                     scrollToSection(link.href);
                   }}
-                  className="text-sm font-medium text-foreground hover:text-primary transition-colors relative group"
+                  className={`relative text-sm font-bold transition-colors ${
+                    onHero
+                      ? "text-white/80 hover:text-white"
+                      : "text-slate-700 hover:text-[#10264d]"
+                  }`}
                 >
                   {link.label}
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-gold group-hover:w-full transition-all duration-300" />
                 </a>
-              );
-            })}
+              )
+            )}
             <Button
-              onClick={() => scrollToSection("#contato")}
-              className="bg-gradient-gold hover:opacity-90 text-secondary-foreground font-semibold shadow-lg hover-scale"
+              asChild
+              className="h-11 rounded-md bg-[#caa24a] px-5 font-black text-[#101828] shadow-none hover:bg-[#d7b35b]"
             >
-              Participe
+              <Link href="/inscricao">Inscrição</Link>
             </Button>
           </nav>
 
           <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 text-foreground hover:text-primary transition-colors"
+            onClick={() => setIsMobileMenuOpen(open => !open)}
+            className={`flex h-11 w-11 items-center justify-center border transition-colors lg:hidden ${
+              onHero && !isMobileMenuOpen
+                ? "border-white/30 text-white"
+                : "border-slate-200 text-[#10264d]"
+            }`}
             aria-label={isMobileMenuOpen ? "Fechar menu" : "Abrir menu"}
             aria-expanded={isMobileMenuOpen}
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </div>
 
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-background/98 backdrop-blur-md border-t border-border">
-          <nav className="container py-6 flex flex-col gap-4">
-            {navLinks.map(link => {
-              const isActive = location === link.href;
-              return link.type === "route" ? (
+        <div className="border-t border-slate-200 bg-white text-[#10264d] shadow-xl lg:hidden">
+          <nav className="container grid gap-1 py-5">
+            {navLinks.map(link =>
+              link.type === "route" ? (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`text-base font-medium transition-colors py-2 ${
-                    isActive
-                      ? "text-primary"
-                      : "text-foreground hover:text-primary"
-                  }`}
+                  className="px-2 py-3 text-base font-bold"
                 >
                   {link.label}
                 </Link>
@@ -151,21 +171,23 @@ export default function Header() {
                 <a
                   key={link.href}
                   href={link.href}
-                  onClick={e => {
-                    e.preventDefault();
+                  onClick={event => {
+                    event.preventDefault();
                     scrollToSection(link.href);
                   }}
-                  className="text-base font-medium text-foreground hover:text-primary transition-colors py-2"
+                  className="px-2 py-3 text-base font-bold"
                 >
                   {link.label}
                 </a>
-              );
-            })}
+              )
+            )}
             <Button
-              onClick={() => scrollToSection("#contato")}
-              className="bg-gradient-gold hover:opacity-90 text-secondary-foreground font-semibold w-full"
+              asChild
+              className="mt-3 h-12 rounded-md bg-[#caa24a] font-black text-[#101828] hover:bg-[#d7b35b]"
             >
-              Participe
+              <Link href="/inscricao" onClick={() => setIsMobileMenuOpen(false)}>
+                Fazer inscrição
+              </Link>
             </Button>
           </nav>
         </div>

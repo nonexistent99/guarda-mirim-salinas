@@ -1,122 +1,94 @@
-import { Award, Heart, Target, Users } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Camera, Check, PenLine, ShieldCheck } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 
-const values = [
-  {
-    icon: Target,
-    title: "Missão",
-    description:
-      "Preparar jovens para o mercado de trabalho através de formação profissional, educação cidadã e desenvolvimento de habilidades essenciais para o futuro.",
-  },
-  {
-    icon: Heart,
-    title: "Valores",
-    description:
-      "Ética, responsabilidade social, respeito, disciplina e compromisso com o desenvolvimento integral dos jovens e da comunidade de Salinas.",
-  },
-  {
-    icon: Award,
-    title: "Excelência",
-    description:
-      "Mais de 40 anos de dedicação à formação de jovens profissionais, com reconhecimento pela qualidade e impacto social transformador na região.",
-  },
-  {
-    icon: Users,
-    title: "Comunidade",
-    description:
-      "Parceria com empresas locais, famílias e instituições para criar um ecossistema de apoio e oportunidades reais para a juventude salinense.",
-  },
+const memoryFields = [
+  "Nome",
+  "Relação com a Guarda",
+  "Ano ou turma aproximada",
+  "Foto ou documento",
+  "Relato curto",
+  "Autorização de uso de imagem",
+  "Contato",
+  "Status de aprovação",
 ];
 
 export default function AboutSection() {
   return (
-    <section id="sobre" className="section-padding bg-background">
+    <section id="memorias" className="bg-[#10264d] py-20 text-white md:py-28">
       <div className="container">
-        {/* Header */}
-        <AnimatedSection>
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <div className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4">
-            Sobre Nós
-          </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-6">
-            Uma História de{" "}
-            <span className="text-gradient-gold">Transformação</span>
-          </h2>
-          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-            Desde 1983, a Guarda Mirim de Salinas tem sido referência na
-            formação de jovens profissionais, conectando educação, cidadania e
-            trabalho para construir um futuro melhor para nossa juventude e
-            nossa cidade.
-          </p>
-        </div>
-        </AnimatedSection>
-
-        {/* Image and Text */}
-        <AnimatedSection delay={0.2}>
-        <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
-          <div className="relative">
-            <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
-              <img
-                src="/jovem-aprendiz-group.jpg"
-                alt="Jovens da Guarda Mirim em treinamento"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            {/* Decorative element */}
-            <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-gradient-gold rounded-2xl -z-10 opacity-20" />
-          </div>
-
-          <div className="space-y-6">
-            <h3 className="text-2xl sm:text-3xl font-bold text-foreground">
-              40 Anos Transformando Vidas
-            </h3>
-            <p className="text-muted-foreground leading-relaxed">
-              A Guarda Mirim de Salinas nasceu da necessidade de oferecer aos
-              jovens da nossa cidade uma oportunidade real de desenvolvimento
-              profissional e pessoal. Ao longo de quatro décadas, formamos mais
-              de 5.000 jovens que hoje são profissionais de sucesso em diversas
-              áreas.
-            </p>
-            <p className="text-muted-foreground leading-relaxed">
-              Nosso programa vai além da capacitação técnica: trabalhamos o
-              desenvolvimento de valores, cidadania, ética profissional e
-              habilidades socioemocionais essenciais para o século XXI. Cada
-              jovem que passa pela Guarda Mirim carrega consigo não apenas
-              conhecimento, mas também orgulho, disciplina e esperança.
-            </p>
-            <p className="text-muted-foreground leading-relaxed">
-              Em parceria com empresas e instituições de Salinas, criamos uma
-              ponte sólida entre a educação e o mercado de trabalho, garantindo
-              que nossos jovens tenham as melhores oportunidades para construir
-              seus futuros.
-            </p>
-          </div>
-        </div>
-        </AnimatedSection>
-
-        {/* Values Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {values.map((value, index) => (
-            <AnimatedSection key={index} delay={0.1 * index}>
-            <div
-              key={index}
-              className="group p-8 rounded-2xl bg-card border border-border hover-lift"
-            >
-              <div className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-gradient-primary transition-colors">
-                <value.icon
-                  className="text-primary group-hover:text-white transition-colors"
-                  size={32}
-                />
+        <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+          <AnimatedSection direction="right">
+            <div className="max-w-2xl">
+              <div className="mb-5 inline-flex border border-white/20 bg-white/10 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[#d7b35b]">
+                Ajude a completar essa história
               </div>
-              <h4 className="text-xl font-bold text-foreground mb-3">
-                {value.title}
-              </h4>
-              <p className="text-muted-foreground leading-relaxed">
-                {value.description}
+              <h2 className="text-4xl font-black leading-[0.95] md:text-6xl">
+                Algumas memórias não estão em documentos.
+              </h2>
+              <p className="mt-6 text-lg leading-8 text-white/78">
+                Estão em fotos guardadas, em amizades antigas e no orgulho de
+                quem um dia vestiu esse uniforme.
               </p>
+              <p className="mt-4 text-sm leading-7 text-white/68 md:text-base">
+                Ex-mirins, familiares, instrutores e parceiros podem ajudar a
+                preencher períodos que ainda aparecem como lacunas na linha do
+                tempo.
+              </p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <Button
+                  asChild
+                  className="h-12 rounded-md bg-[#caa24a] font-black text-[#101828] hover:bg-[#d7b35b]"
+                >
+                  <a href="#contato">
+                    <PenLine size={18} />
+                    Enviar memória
+                  </a>
+                </Button>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="h-12 rounded-md border-white/25 bg-white/5 font-black text-white hover:bg-white/12"
+                >
+                  <a href="#historia">
+                    <Camera size={18} />
+                    Ver lacunas
+                  </a>
+                </Button>
+              </div>
             </div>
-            </AnimatedSection>
-          ))}
+          </AnimatedSection>
+
+          <AnimatedSection delay={0.15} direction="left">
+            <div className="border border-white/20 bg-white/[0.07] p-5 backdrop-blur md:p-6">
+              <div className="mb-5 flex items-center gap-3 border-b border-white/15 pb-5">
+                <div className="flex h-11 w-11 items-center justify-center border border-[#caa24a]/45 text-[#d7b35b]">
+                  <ShieldCheck size={22} />
+                </div>
+                <div>
+                  <h3 className="text-xl font-black">
+                    Memórias enviadas entram em revisão.
+                  </h3>
+                  <p className="mt-1 text-sm text-white/62">
+                    O admin já fica preparado para aprovar, recusar ou converter
+                    relatos em itens da timeline.
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid gap-2 sm:grid-cols-2">
+                {memoryFields.map(field => (
+                  <div
+                    key={field}
+                    className="flex items-center gap-2 border border-white/15 bg-white/[0.04] px-3 py-3 text-sm font-semibold text-white/80"
+                  >
+                    <Check size={16} className="text-[#d7b35b]" />
+                    {field}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </AnimatedSection>
         </div>
       </div>
     </section>

@@ -3,57 +3,41 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import {
-  Building2,
+  ExternalLink,
+  Instagram,
   Mail,
   MapPin,
   Phone,
   Send,
-  UserPlus,
-  Users,
 } from "lucide-react";
 import { useState } from "react";
 import AnimatedSection from "@/components/AnimatedSection";
 import { trpc } from "@/lib/trpc";
 
-const contactInfo = [
+const officialContacts = [
   {
     icon: Phone,
-    title: "Telefone",
-    value: "(38) 9 9999-9999",
-    link: "tel:+5538999999999",
+    title: "Telefone oficial",
+    value: "(38) 3841-6512",
+    link: "tel:+553838416512",
   },
   {
     icon: Mail,
-    title: "E-mail",
-    value: "contato@guardamirimsalinas.org.br",
-    link: "mailto:contato@guardamirimsalinas.org.br",
+    title: "E-mail oficial",
+    value: "guardamirim@salinas.mg.gov.br",
+    link: "mailto:guardamirim@salinas.mg.gov.br",
   },
   {
     icon: MapPin,
     title: "Endereço",
-    value: "Salinas, Minas Gerais, Brasil",
-    link: null,
-  },
-];
-
-const participationOptions = [
-  {
-    icon: UserPlus,
-    title: "Seja um Jovem Aprendiz",
-    description:
-      "Inscreva-se no programa e dê o primeiro passo para sua carreira profissional.",
+    value: "R. Ver. Corinto Pereira de Castro, 163 - Bairro Alvorada",
+    link: "https://www.google.com/maps/search/?api=1&query=R.%20Ver.%20Corinto%20Pereira%20de%20Castro%20163%20Bairro%20Alvorada%20Salinas%20MG",
   },
   {
-    icon: Building2,
-    title: "Seja uma Empresa Parceira",
-    description:
-      "Junte-se às empresas que investem no futuro dos jovens de Salinas.",
-  },
-  {
-    icon: Users,
-    title: "Seja um Voluntário",
-    description:
-      "Contribua com seu tempo e conhecimento para transformar vidas.",
+    icon: Instagram,
+    title: "Instagram",
+    value: "@guardamirimsalinas",
+    link: "https://www.instagram.com/guardamirimsalinas/",
   },
 ];
 
@@ -62,247 +46,272 @@ export default function ContactSection() {
     name: "",
     email: "",
     phone: "",
-    subject: "Contato via Site",
+    relation: "",
+    approxYear: "",
     message: "",
+    authorized: false,
   });
 
   const createMessageMutation = trpc.messages.create.useMutation();
   const isSubmitting = createMessageMutation.isPending;
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
 
     if (!formData.name || !formData.email || !formData.message) {
-      toast.error("Por favor, preencha todos os campos obrigatórios.");
+      toast.error("Preencha nome, e-mail e relato.");
       return;
     }
+
+    if (!formData.authorized) {
+      toast.error("Confirme a autorização antes de enviar a memória.");
+      return;
+    }
+
+    const message = [
+      `Relação com a Guarda: ${formData.relation || "não informado"}`,
+      `Ano/turma aproximada: ${formData.approxYear || "não informado"}`,
+      `Autorização de uso de imagem/relato: sim`,
+      "",
+      formData.message,
+    ].join("\n");
 
     try {
       await createMessageMutation.mutateAsync({
         name: formData.name,
         email: formData.email,
         phone: formData.phone || undefined,
-        subject: formData.subject,
-        message: formData.message,
+        subject: "Memória para a linha do tempo",
+        message,
       });
 
-      toast.success(
-        "Mensagem enviada com sucesso! Entraremos em contato em breve."
-      );
-
+      toast.success("Memória enviada para revisão. Obrigado por ajudar.");
       setFormData({
         name: "",
         email: "",
         phone: "",
-        subject: "Contato via Site",
+        relation: "",
+        approxYear: "",
         message: "",
+        authorized: false,
       });
     } catch (error) {
-      toast.error("Erro ao enviar mensagem. Tente novamente.");
+      toast.error("Erro ao enviar. Tente novamente.");
       console.error(error);
     }
   };
 
   return (
-    <section id="contato" className="section-padding bg-background">
+    <section id="contato" className="bg-white py-20 text-[#10264d] md:py-28">
       <div className="container">
-        {/* Header */}
         <AnimatedSection>
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4">
-            <Send size={16} />
-            Entre em Contato
+          <div className="mx-auto max-w-3xl text-center">
+            <div className="mb-5 inline-flex items-center gap-2 border border-[#caa24a]/45 bg-[#fff7df] px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[#8a6a1e]">
+              <Send size={16} />
+              Contato e envio de memória
+            </div>
+            <h2 className="text-4xl font-black leading-[0.95] md:text-6xl">
+              Uma foto antiga pode abrir uma nova página.
+            </h2>
+            <p className="mt-6 text-base leading-8 text-slate-700 md:text-lg">
+              Envie relatos, informações de turma ou interesse de parceria. O
+              conteúdo recebido deve ser revisado antes de aparecer no site.
+            </p>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-6">
-            Faça Parte da{" "}
-            <span className="text-gradient-gold">Guarda Mirim</span>
-          </h2>
-          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-            Seja você um jovem em busca de oportunidades, uma empresa querendo
-            investir no futuro ou alguém que deseja contribuir, estamos prontos
-            para recebê-lo.
-          </p>
-        </div>
         </AnimatedSection>
 
-        {/* Participation Options */}
-        <AnimatedSection delay={0.2}>
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
-          {participationOptions.map((option, index) => (
-            <div
-              key={index}
-              className="group p-8 rounded-2xl bg-card border-2 border-border hover:border-primary/50 hover-lift transition-all text-center"
-            >
-              <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-gradient-primary transition-colors">
-                <option.icon
-                  className="text-primary group-hover:text-white transition-colors"
-                  size={32}
-                />
-              </div>
-              <h3 className="text-xl font-bold text-foreground mb-3">
-                {option.title}
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                {option.description}
-              </p>
-            </div>
-          ))}
-        </div>
-        </AnimatedSection>
-
-        {/* Contact Grid */}
-        <AnimatedSection delay={0.4}>
-        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {/* Contact Info */}
-          <div className="space-y-8">
-            <div>
-            <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-6">
-              Informações de Contato
-            </h3>
-              <div className="space-y-6">
-                {contactInfo.map((info, index) => (
-                  <div key={index} className="flex items-start gap-4">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                      <info.icon className="text-primary" size={24} />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-foreground mb-1">
-                        {info.title}
-                      </div>
-                      {info.link ? (
-                        <a
-                          href={info.link}
-                          className="text-muted-foreground hover:text-primary transition-colors"
-                        >
-                          {info.value}
-                        </a>
-                      ) : (
-                        <div className="text-muted-foreground">
-                          {info.value}
-                        </div>
+        <div className="mt-12 grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
+          <AnimatedSection direction="right">
+            <div className="grid gap-4">
+              {officialContacts.map(contact => (
+                <a
+                  key={contact.title}
+                  href={contact.link}
+                  target={contact.link.startsWith("http") ? "_blank" : undefined}
+                  rel={
+                    contact.link.startsWith("http")
+                      ? "noopener noreferrer"
+                      : undefined
+                  }
+                  className="group flex items-start gap-4 border border-slate-200 bg-[#fbfaf4] p-5 transition-colors hover:border-[#caa24a]/70"
+                >
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center border border-[#10264d]/15 bg-white text-[#10264d]">
+                    <contact.icon size={22} />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block text-sm font-black uppercase tracking-[0.12em] text-slate-500">
+                      {contact.title}
+                    </span>
+                    <span className="mt-1 flex items-center gap-2 break-words text-base font-bold text-[#10264d]">
+                      {contact.value}
+                      {contact.link.startsWith("http") && (
+                        <ExternalLink
+                          size={15}
+                          className="shrink-0 opacity-60 transition-opacity group-hover:opacity-100"
+                        />
                       )}
-                    </div>
-                  </div>
-                ))}
+                    </span>
+                  </span>
+                </a>
+              ))}
+              <div className="border border-dashed border-[#caa24a]/70 bg-[#f6f3ea] p-5 text-sm leading-7 text-slate-700">
+                Fonte dos contatos: página oficial da Guarda Mirim no portal da
+                Prefeitura de Salinas.
               </div>
             </div>
+          </AnimatedSection>
 
-            {/* Image */}
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-              <img
-                src="/salinas-city-view.jpg"
-                alt="Vista de Salinas"
-                className="w-full h-64 object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-transparent flex items-end p-6">
-                <div className="text-white">
-                  <div className="font-bold text-xl mb-1">Salinas, MG</div>
-                  <div className="text-sm opacity-90">
-                    Nossa cidade, nosso compromisso
-                  </div>
+          <AnimatedSection delay={0.12} direction="left">
+            <form
+              onSubmit={handleSubmit}
+              className="border border-[#d8cda8] bg-[#f6f3ea] p-5 md:p-6"
+            >
+              <div className="grid gap-4 md:grid-cols-2">
+                <div>
+                  <label
+                    htmlFor="memory-name"
+                    className="mb-2 block text-sm font-bold"
+                  >
+                    Nome *
+                  </label>
+                  <Input
+                    id="memory-name"
+                    value={formData.name}
+                    onChange={event =>
+                      setFormData({ ...formData, name: event.target.value })
+                    }
+                    disabled={isSubmitting}
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="memory-email"
+                    className="mb-2 block text-sm font-bold"
+                  >
+                    E-mail *
+                  </label>
+                  <Input
+                    id="memory-email"
+                    type="email"
+                    value={formData.email}
+                    onChange={event =>
+                      setFormData({ ...formData, email: event.target.value })
+                    }
+                    disabled={isSubmitting}
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="memory-phone"
+                    className="mb-2 block text-sm font-bold"
+                  >
+                    Telefone
+                  </label>
+                  <Input
+                    id="memory-phone"
+                    value={formData.phone}
+                    onChange={event =>
+                      setFormData({ ...formData, phone: event.target.value })
+                    }
+                    disabled={isSubmitting}
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="memory-relation"
+                    className="mb-2 block text-sm font-bold"
+                  >
+                    Relação com a Guarda
+                  </label>
+                  <Input
+                    id="memory-relation"
+                    placeholder="ex-mirim, familiar, instrutor, parceiro"
+                    value={formData.relation}
+                    onChange={event =>
+                      setFormData({
+                        ...formData,
+                        relation: event.target.value,
+                      })
+                    }
+                    disabled={isSubmitting}
+                  />
+                </div>
+                <div className="md:col-span-2">
+                  <label
+                    htmlFor="memory-year"
+                    className="mb-2 block text-sm font-bold"
+                  >
+                    Ano ou turma aproximada
+                  </label>
+                  <Input
+                    id="memory-year"
+                    placeholder="ex.: turma 2024, desfile de 7 de setembro"
+                    value={formData.approxYear}
+                    onChange={event =>
+                      setFormData({
+                        ...formData,
+                        approxYear: event.target.value,
+                      })
+                    }
+                    disabled={isSubmitting}
+                  />
+                </div>
+                <div className="md:col-span-2">
+                  <label
+                    htmlFor="memory-message"
+                    className="mb-2 block text-sm font-bold"
+                  >
+                    Relato *
+                  </label>
+                  <Textarea
+                    id="memory-message"
+                    rows={6}
+                    placeholder="Conte a lembrança, indique fonte, pessoa, turma ou contexto da foto."
+                    value={formData.message}
+                    onChange={event =>
+                      setFormData({
+                        ...formData,
+                        message: event.target.value,
+                      })
+                    }
+                    disabled={isSubmitting}
+                    required
+                  />
                 </div>
               </div>
-            </div>
-          </div>
 
-          {/* Contact Form */}
-          <div className="p-8 rounded-2xl bg-card border border-border">
-            <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-6">
-              Envie sua Mensagem
-            </h3>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium text-foreground mb-2"
-                >
-                  Nome Completo *
-                </label>
-                <Input
-                  id="name"
-                  type="text"
-                  placeholder="Seu nome"
-                  value={formData.name}
-                  onChange={(e) =>
-                    setFormData({ ...formData, name: e.target.value })
+              <label className="mt-5 flex gap-3 text-sm leading-6 text-slate-700">
+                <input
+                  type="checkbox"
+                  checked={formData.authorized}
+                  onChange={event =>
+                    setFormData({
+                      ...formData,
+                      authorized: event.target.checked,
+                    })
                   }
-                  disabled={isSubmitting}
-                  required
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-foreground mb-2"
-                >
-                  E-mail *
-                </label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="seu@email.com"
-                  value={formData.email}
-                  onChange={(e) =>
-                    setFormData({ ...formData, email: e.target.value })
-                  }
-                  disabled={isSubmitting}
-                  required
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="phone"
-                  className="block text-sm font-medium text-foreground mb-2"
-                >
-                  Telefone
-                </label>
-                <Input
-                  id="phone"
-                  type="tel"
-                  placeholder="(38) 9 9999-9999"
-                  value={formData.phone}
-                  onChange={(e) =>
-                    setFormData({ ...formData, phone: e.target.value })
-                  }
+                  className="mt-1 h-4 w-4 accent-[#10264d]"
                   disabled={isSubmitting}
                 />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-foreground mb-2"
-                >
-                  Mensagem *
-                </label>
-                <Textarea
-                  id="message"
-                  placeholder="Como podemos ajudá-lo?"
-                  rows={5}
-                  value={formData.message}
-                  onChange={(e) =>
-                    setFormData({ ...formData, message: e.target.value })
-                  }
-                  disabled={isSubmitting}
-                  required
-                />
-              </div>
+                Autorizo o contato da equipe e o uso do relato/imagem enviada
+                após revisão e aprovação.
+              </label>
 
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-gradient-gold hover:opacity-90 text-secondary-foreground font-semibold text-lg py-6 hover-scale"
+                className="mt-6 h-12 w-full rounded-md bg-[#10264d] font-black text-white hover:bg-[#173869]"
               >
-                {isSubmitting ? "Enviando..." : "Enviar Mensagem"}
-                <Send className="ml-2" size={20} />
+                {isSubmitting ? "Enviando..." : "Enviar para revisão"}
+                <Send size={18} />
               </Button>
             </form>
-          </div>
+          </AnimatedSection>
         </div>
-        </AnimatedSection>
       </div>
     </section>
   );
 }
+

@@ -13,166 +13,101 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
-    id: "1",
-    title: "Guarda Mirim celebra 40 anos com evento histórico em Salinas",
+    id: "edital-26-exame-2026",
+    title: "26º Exame de Seleção tem edital publicado no portal oficial",
     excerpt:
-      "Instituição marca quatro décadas de dedicação à formação de jovens com cerimônia especial reunindo ex-alunos, parceiros e autoridades.",
-    content: `A Guarda Mirim de Salinas celebrou em grande estilo seus 40 anos de história com um evento memorável que reuniu mais de 500 pessoas. A cerimônia, realizada no auditório da Prefeitura Municipal, contou com a presença de ex-alunos que hoje são profissionais de sucesso, empresários parceiros, autoridades locais e familiares.
+      "O Edital nº 001/2026 está disponível no portal da Prefeitura de Salinas para consulta pública.",
+    content: `O portal oficial da Prefeitura de Salinas publicou o Edital nº 001/2026 do 26º Exame de Seleção da Guarda Mirim Municipal de Salinas.
 
-Durante o evento, foram homenageados os fundadores da instituição e apresentados os principais marcos de sua trajetória. "Estes 40 anos representam mais de 5 mil vidas transformadas e uma comunidade inteira que cresceu junto com a Guarda Mirim", afirmou o diretor executivo.
+A página pública informa a publicação do edital e mantém o documento disponível para consulta. Antes de divulgar novas etapas, datas ou chamadas na home, a equipe deve conferir a situação atual diretamente no portal oficial e no Instagram da Guarda Mirim.
 
-O destaque foi a apresentação de um documentário mostrando histórias de sucesso de ex-alunos que hoje ocupam posições de destaque em suas áreas profissionais. A celebração contou também com apresentações culturais de jovens aprendizes atuais.`,
+Fonte: https://www.salinas.mg.gov.br/portal/editais/0/3/3238/`,
     category: "noticia",
-    author: "Redação Guarda Mirim",
-    date: "2025-01-15",
-    image: "/jovem-aprendiz-group.jpg",
-    readTime: 5,
+    author: "Fonte pública oficial",
+    date: "2026-03-09",
+    image: "/images/guarda/hero-formacao.jpg",
+    readTime: 2,
     featured: true,
   },
   {
-    id: "2",
-    title: "Novo programa de capacitação em tecnologia é lançado",
+    id: "guarda-mirim-34-anos-2025",
+    title: "Guarda Mirim completa 34 anos em 2025",
     excerpt:
-      "Guarda Mirim amplia oferta de cursos com foco em programação, desenvolvimento web e análise de dados.",
-    content: `A Guarda Mirim de Salinas anunciou o lançamento de um novo programa de capacitação em tecnologia, respondendo à crescente demanda do mercado por profissionais qualificados nesta área.
+      "Registro público destaca a trajetória da Guarda Mirim na formação de jovens cidadãos em Salinas.",
+    content: `Em 2025, fontes públicas registraram os 34 anos da Guarda Mirim de Salinas. O marco aparece em notícia vinculada ao portal da Prefeitura e em matéria pública sobre a instituição.
 
-O programa inclui cursos em programação (Python, JavaScript), desenvolvimento web (HTML, CSS, React), análise de dados e segurança da informação. As aulas serão ministradas por profissionais experientes da área tech e contarão com laboratórios equipados com computadores modernos.
+Esse tipo de conteúdo deve ser usado como referência para a narrativa da linha do tempo, sempre com link de fonte e sem transformar frases comemorativas em estatísticas não confirmadas.
 
-"A tecnologia é o futuro, e queremos garantir que nossos jovens estejam preparados para as oportunidades que virão", explicou a coordenadora pedagógica. O programa terá início em fevereiro com inscrições abertas para jovens entre 14 e 24 anos.`,
+Fontes: https://www.salinas.mg.gov.br/portal/noticias/0/3/3208/na-midia---guarda-mirim-de-salinas-comemora-34-anos-formando-jovens-cidadaos/ e https://minasnews.com.br/guarda-mirim-de-salinas-completa-34-anos-com-destaque-na-formacao-de-jovens-cidadaos/`,
     category: "destaque",
-    author: "Coordenação Pedagógica",
-    date: "2025-01-10",
-    image: "/training-group.png",
-    readTime: 4,
+    author: "Fonte pública",
+    date: "2025-05-12",
+    image: "/images/timeline/2025-desfile.jpg",
+    readTime: 3,
     featured: true,
   },
   {
-    id: "3",
-    title: "Parceria com 15 novas empresas amplia oportunidades de trabalho",
+    id: "aula-inaugural-2025",
+    title: "Aula inaugural do Curso de Assistente Administrativo",
     excerpt:
-      "Guarda Mirim firma convênios com empresas de diversos setores, criando mais de 50 vagas de aprendizagem.",
-    content: `A Guarda Mirim de Salinas anunciou uma importante expansão de suas parcerias com o setor empresarial. Quinze novas empresas assinaram convênios com a instituição, comprometendo-se a oferecer oportunidades de aprendizagem prática para jovens formados pelo programa.
+      "A Prefeitura publicou registro da aula inaugural realizada pela Guarda Mirim em 2025.",
+    content: `A Prefeitura de Salinas publicou notícia sobre a aula inaugural do Curso de Assistente Administrativo da Guarda Mirim em 2025.
 
-As empresas parceiras atuam em diversos setores: comércio, serviços, indústria, saúde e educação. Ao todo, foram criadas mais de 50 vagas de aprendizagem para os próximos meses.
+Esse registro reforça a importância de tratar a home como acervo vivo: cada formação, aula inaugural e solenidade pode alimentar a timeline com data, fonte, imagem e contexto.
 
-"Estas parcerias são fundamentais para conectar a educação ao mercado de trabalho. Nossos jovens terão a oportunidade de ganhar experiência prática enquanto continuam sua formação", destacou o diretor de parcerias.`,
-    category: "noticia",
-    author: "Departamento de Parcerias",
-    date: "2025-01-05",
-    image: "/jovem-aprendiz-group.jpg",
-    readTime: 3,
-  },
-  {
-    id: "4",
-    title: "Evento de Networking conecta jovens aprendizes com profissionais",
-    excerpt:
-      "Encontro reúne 200 participantes para troca de experiências e oportunidades de mentoria.",
-    content: `A Guarda Mirim realizou com sucesso o primeiro evento de Networking do ano, reunindo 200 jovens aprendizes, profissionais experientes e empresários. O encontro, realizado no Centro de Convenções de Salinas, proporcionou momentos de troca de experiências, mentoria e networking.
-
-Durante o evento, foram realizadas palestras com profissionais de sucesso que compartilharam suas trajetórias e dicas para o desenvolvimento profissional. Houve também rodas de conversa temáticas sobre diferentes áreas de atuação.
-
-"Eventos como este são essenciais para que nossos jovens entendam as possibilidades que existem e façam conexões valiosas para suas carreiras", afirmou a coordenadora de eventos.`,
+Fonte: https://www.salinas.mg.gov.br/portal/noticias/0/3/3225/guarda-mirim-realiza-aula-inaugural-do-curso-de-assistente-administrativo/`,
     category: "evento",
-    author: "Coordenação de Eventos",
-    date: "2024-12-20",
-    image: "/salinas-city-view.jpg",
-    readTime: 4,
+    author: "Prefeitura de Salinas",
+    date: "2025-05-22",
+    image: "/images/guarda/hero-formacao.jpg",
+    readTime: 2,
   },
   {
-    id: "5",
-    title: "Depoimento: Como a Guarda Mirim mudou minha vida",
+    id: "graduacao-2024",
+    title: "Solenidade de graduação registrada pela Prefeitura",
     excerpt:
-      "João Silva, formado em 2018, conta sua história de transformação e sucesso profissional.",
-    content: `João Silva, 24 anos, é um exemplo vivo do impacto transformador da Guarda Mirim de Salinas. Formado em 2018, ele passou de um jovem sem perspectivas para um profissional bem-sucedido na área de administração.
+      "Notícia oficial de 2024 registra solenidade de graduação da Guarda Mirim.",
+    content: `A Prefeitura de Salinas publicou registro da solenidade de graduação da Guarda Mirim realizada em 2024.
 
-"Quando entrei na Guarda Mirim, eu não sabia o que queria para meu futuro. O programa não apenas me ensinou habilidades técnicas, mas também me mostrou a importância da disciplina, ética e responsabilidade", relembra João.
+O conteúdo é uma das bases visuais e documentais da nova timeline: formaturas são momentos de fechamento de ciclo e devem aparecer com foto, fonte e texto emocional separado da descrição factual.
 
-Após sua formação, João foi contratado por uma empresa local onde trabalhou por dois anos. Hoje, ele é gerente administrativo em uma empresa regional e está cursando faculdade de Administração. "Devo tudo isso à Guarda Mirim. A instituição mudou minha vida e a de minha família", conclui com gratidão.`,
+Fonte: https://www.salinas.mg.gov.br/portal/noticias/0/3/2764/guarda-mirim-realiza-solenidade-de-graduacao/`,
+    category: "evento",
+    author: "Prefeitura de Salinas",
+    date: "2024-04-26",
+    image: "/images/guarda/formatura.jpg",
+    readTime: 2,
+    featured: true,
+  },
+  {
+    id: "papai-noel-correios-2023",
+    title: "Ação social no Papai Noel dos Correios",
+    excerpt:
+      "Registro oficial mostra participação da Guarda Mirim em ação social de 2023.",
+    content: `A Guarda Mirim de Salinas participou da campanha Papai Noel dos Correios 2023, conforme notícia publicada no portal da Prefeitura.
+
+Na nova home, esse tipo de registro entra como ação social: um marco que mostra a presença dos mirins também fora da rotina de formação.
+
+Fonte: https://www.salinas.mg.gov.br/portal/noticias/0/3/2565/guarda-mirim-de-salinas-participa-do-papai-noel-dos-correios-2023/`,
+    category: "noticia",
+    author: "Prefeitura de Salinas",
+    date: "2023-12-20",
+    image: "/salinas-city-view.jpg",
+    readTime: 2,
+  },
+  {
+    id: "memorias-em-construcao",
+    title: "Memórias de ex-mirins entram em revisão antes de ir ao ar",
+    excerpt:
+      "A nova linha do tempo abre espaço para relatos, fotos antigas e lembranças enviadas pela comunidade.",
+    content: `A nova experiência do site foi preparada para receber memórias de ex-mirins, familiares, instrutores e parceiros.
+
+Todo relato recebido deve passar por revisão, autorização de uso de imagem e checagem mínima de contexto antes de virar item público da timeline. Quando não houver confirmação suficiente, o conteúdo deve permanecer marcado como "a confirmar".`,
     category: "depoimento",
-    author: "João Silva",
-    date: "2024-12-15",
-    image: "/jovem-aprendiz-group.jpg",
-    readTime: 5,
-  },
-  {
-    id: "6",
-    title: "Programa de bolsas para educação continuada é aprovado",
-    excerpt:
-      "Guarda Mirim abre inscrições para bolsas de estudo em cursos técnicos e superiores.",
-    content: `A Guarda Mirim de Salinas anunciou a aprovação de um novo programa de bolsas destinado a apoiar ex-alunos que desejam continuar seus estudos em cursos técnicos ou superiores.
-
-O programa oferecerá bolsas parciais e integrais, dependendo do perfil socioeconômico do candidato. As inscrições estão abertas para ex-alunos que completaram o programa de aprendizagem há pelo menos um ano.
-
-"Acreditamos que a educação é um direito e um caminho para a transformação social. Este programa reflete nosso compromisso com o desenvolvimento contínuo de nossos ex-alunos", explicou a diretora educacional.`,
-    category: "destaque",
-    author: "Departamento Educacional",
-    date: "2024-12-10",
-    image: "/training-group.png",
-    readTime: 3,
-  },
-  {
-    id: "7",
-    title: "Guarda Mirim recebe prêmio de Responsabilidade Social",
-    excerpt:
-      "Instituição é reconhecida por seu impacto na formação de jovens e desenvolvimento comunitário.",
-    content: `A Guarda Mirim de Salinas foi homenageada com o Prêmio Regional de Responsabilidade Social, reconhecimento que destaca seu trabalho transformador na formação de jovens e impacto na comunidade.
-
-O prêmio foi entregue durante cerimônia realizada em Belo Horizonte, com a presença de autoridades estaduais e representantes de diversas instituições. A premiação reconhece o trabalho de 40 anos da Guarda Mirim em conectar educação, cidadania e trabalho.
-
-"Este prêmio é uma validação do nosso trabalho e um incentivo para continuarmos transformando vidas", afirmou o diretor executivo ao receber a honraria.`,
-    category: "noticia",
-    author: "Redação Guarda Mirim",
-    date: "2024-12-05",
-    image: "/salinas-aerial.jpg",
-    readTime: 3,
-  },
-  {
-    id: "8",
-    title: "Workshop de empreendedorismo capacita jovens aprendizes",
-    excerpt:
-      "Evento prático ensina conceitos de negócios e plano de negócios para futuros empreendedores.",
-    content: `A Guarda Mirim realizou um workshop intensivo sobre empreendedorismo, reunindo 80 jovens aprendizes interessados em abrir seus próprios negócios.
-
-O evento contou com a participação de empreendedores locais bem-sucedidos que compartilharam suas experiências e desafios. Os participantes aprenderam sobre plano de negócios, gestão financeira, marketing e como transformar uma ideia em realidade.
-
-"Muitos de nossos ex-alunos se tornam empreendedores. Este workshop é uma forma de preparar os atuais aprendizes para esta possibilidade", explicou o coordenador de empreendedorismo.`,
-    category: "evento",
-    author: "Coordenação de Empreendedorismo",
-    date: "2024-11-30",
-    image: "/jovem-aprendiz-group.jpg",
-    readTime: 4,
-  },
-  {
-    id: "9",
-    title: "Estudo mostra 85% de empregabilidade entre ex-alunos",
-    excerpt:
-      "Pesquisa comprova efetividade do programa na inserção profissional de jovens.",
-    content: `Um estudo realizado pela Guarda Mirim de Salinas revelou que 85% dos ex-alunos conseguem se inserir no mercado de trabalho dentro de seis meses após a conclusão do programa.
-
-A pesquisa, que entrevistou mais de 1.000 ex-alunos dos últimos cinco anos, também mostrou que 60% deles conseguem manter seus empregos por mais de dois anos, indicando uma boa adaptação e desenvolvimento profissional.
-
-"Estes números comprovam que nosso modelo de formação funciona e prepara realmente os jovens para o mercado de trabalho", afirmou o coordenador de pesquisa.`,
-    category: "destaque",
-    author: "Departamento de Pesquisa",
-    date: "2024-11-25",
-    image: "/salinas-city-view.jpg",
-    readTime: 4,
-  },
-  {
-    id: "10",
-    title: "Inscrições abertas para turma 2025 da Guarda Mirim",
-    excerpt:
-      "Instituição recebe inscrições para novo ciclo de aprendizagem com 150 vagas disponíveis.",
-    content: `A Guarda Mirim de Salinas abriu as inscrições para a turma de 2025, oferecendo 150 vagas para jovens entre 14 e 24 anos interessados em participar do programa de formação profissional.
-
-As inscrições podem ser realizadas presencialmente na sede da instituição ou através do site. O processo seletivo inclui entrevista e avaliação de conhecimentos básicos.
-
-"Estamos prontos para receber uma nova geração de jovens e transformar suas vidas através da educação, cidadania e trabalho", convida o diretor de admissões.`,
-    category: "noticia",
-    author: "Departamento de Admissões",
-    date: "2024-11-20",
-    image: "/training-group.png",
-    readTime: 3,
+    author: "Equipe do site",
+    date: "2026-06-10",
+    image: "/images/guarda/desfile.jpg",
+    readTime: 2,
   },
 ];
 
@@ -180,5 +115,5 @@ export const categories = [
   { id: "noticia", label: "Notícias", color: "primary" },
   { id: "destaque", label: "Destaques", color: "secondary" },
   { id: "evento", label: "Eventos", color: "accent" },
-  { id: "depoimento", label: "Depoimentos", color: "primary" },
+  { id: "depoimento", label: "Memórias", color: "primary" },
 ];
