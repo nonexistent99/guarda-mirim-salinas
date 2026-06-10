@@ -4,14 +4,12 @@ import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
-  { href: "#inicio", label: "Início", type: "anchor" as const },
-  { href: "#processo", label: "Processo", type: "anchor" as const },
-  { href: "#historia", label: "Linha do tempo", type: "anchor" as const },
-  { href: "#memorias", label: "Memórias", type: "anchor" as const },
-  { href: "#empresas", label: "Empresas", type: "anchor" as const },
-  { href: "#acervo", label: "Acervo", type: "anchor" as const },
-  { href: "/galeria", label: "Galeria", type: "route" as const },
-  { href: "#contato", label: "Contato", type: "anchor" as const },
+  { href: "#inicio", label: "Início" },
+  { href: "#processo", label: "Processo" },
+  { href: "#historia", label: "Linha do tempo" },
+  { href: "#memorias", label: "Memórias" },
+  { href: "#empresas", label: "Empresas" },
+  { href: "#contato", label: "Contato" },
 ];
 
 export default function Header() {
@@ -98,39 +96,23 @@ export default function Header() {
           </a>
 
           <nav className="hidden items-center gap-5 lg:flex">
-            {navLinks.map(link =>
-              link.type === "route" ? (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`relative text-sm font-bold transition-colors ${
-                    location === link.href
-                      ? "text-[#caa24a]"
-                      : onHero
-                        ? "text-white/80 hover:text-white"
-                        : "text-slate-700 hover:text-[#10264d]"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              ) : (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={event => {
-                    event.preventDefault();
-                    scrollToSection(link.href);
-                  }}
-                  className={`relative text-sm font-bold transition-colors ${
-                    onHero
-                      ? "text-white/80 hover:text-white"
-                      : "text-slate-700 hover:text-[#10264d]"
-                  }`}
-                >
-                  {link.label}
-                </a>
-              )
-            )}
+            {navLinks.map(link => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={event => {
+                  event.preventDefault();
+                  scrollToSection(link.href);
+                }}
+                className={`relative text-sm font-bold transition-colors ${
+                  onHero
+                    ? "text-white/80 hover:text-white"
+                    : "text-slate-700 hover:text-[#10264d]"
+                }`}
+              >
+                {link.label}
+              </a>
+            ))}
             <Button
               asChild
               className="h-11 rounded-md bg-[#caa24a] px-5 font-black text-[#101828] shadow-none hover:bg-[#d7b35b]"
@@ -157,30 +139,19 @@ export default function Header() {
       {isMobileMenuOpen && (
         <div className="border-t border-slate-200 bg-white text-[#10264d] shadow-xl lg:hidden">
           <nav className="container grid gap-1 py-5">
-            {navLinks.map(link =>
-              link.type === "route" ? (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="px-2 py-3 text-base font-bold"
-                >
-                  {link.label}
-                </Link>
-              ) : (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={event => {
-                    event.preventDefault();
-                    scrollToSection(link.href);
-                  }}
-                  className="px-2 py-3 text-base font-bold"
-                >
-                  {link.label}
-                </a>
-              )
-            )}
+            {navLinks.map(link => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={event => {
+                  event.preventDefault();
+                  scrollToSection(link.href);
+                }}
+                className="px-2 py-3 text-base font-bold"
+              >
+                {link.label}
+              </a>
+            ))}
             <Button
               asChild
               className="mt-3 h-12 rounded-md bg-[#caa24a] font-black text-[#101828] hover:bg-[#d7b35b]"

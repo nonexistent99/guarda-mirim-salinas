@@ -24,8 +24,8 @@ export default function TestimonialsSection() {
             </div>
             <p className="text-base leading-8 text-slate-700 md:text-lg">
               Esta área mostra marcos com fonte pública e pode evoluir para um
-              acervo alimentado pelo admin, sempre separando registro oficial,
-              post original e memória enviada.
+              acervo de fotos, nomes de turma e lembranças enviadas pela
+              comunidade.
             </p>
           </div>
         </AnimatedSection>

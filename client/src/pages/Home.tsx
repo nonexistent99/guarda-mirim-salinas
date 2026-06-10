@@ -5,7 +5,6 @@ import EnrollmentStatusSection from "@/components/sections/EnrollmentStatusSecti
 import AboutSection from "@/components/sections/AboutSection";
 import ImportanceSection from "@/components/sections/ImportanceSection";
 import TimelineSection from "@/components/sections/TimelineSection";
-import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import ContactSection from "@/components/sections/ContactSection";
 
 export default function Home() {
@@ -18,7 +17,6 @@ export default function Home() {
         <TimelineSection />
         <AboutSection />
         <ImportanceSection />
-        <TestimonialsSection />
         <ContactSection />
       </main>
       <Footer />
