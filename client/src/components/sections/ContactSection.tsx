@@ -12,7 +12,8 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import AnimatedSection from "@/components/AnimatedSection";
-import { trpc } from "@/lib/trpc";
+
+const NETLIFY_MEMORY_FORM_NAME = "memorias-guarda";
 
 const officialContacts = [
   {
@@ -52,10 +53,9 @@ export default function ContactSection() {
     authorized: false,
   });
 
-  const createMessageMutation = trpc.messages.create.useMutation();
-  const isSubmitting = createMessageMutation.isPending;
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!formData.name || !formData.email || !formData.message) {
@@ -68,22 +68,30 @@ export default function ContactSection() {
       return;
     }
 
-    const message = [
-      `Relação com a Guarda: ${formData.relation || "não informado"}`,
-      `Ano/turma aproximada: ${formData.approxYear || "não informado"}`,
-      `Autorização de uso de imagem/relato: sim`,
-      "",
-      formData.message,
-    ].join("\n");
-
     try {
-      await createMessageMutation.mutateAsync({
+      setIsSubmitting(true);
+
+      const body = new URLSearchParams({
+        "form-name": NETLIFY_MEMORY_FORM_NAME,
         name: formData.name,
         email: formData.email,
-        phone: formData.phone || undefined,
-        subject: "Memória para a linha do tempo",
-        message,
+        phone: formData.phone,
+        relation: formData.relation,
+        approxYear: formData.approxYear,
+        message: formData.message,
+        authorized: "sim",
+        "bot-field": "",
       });
+
+      const response = await fetch("/__forms.html", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body.toString(),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Netlify Forms returned ${response.status}`);
+      }
 
       toast.success("Memória enviada para revisão. Obrigado por ajudar.");
       setFormData({
@@ -98,6 +106,8 @@ export default function ContactSection() {
     } catch (error) {
       toast.error("Erro ao enviar. Tente novamente.");
       console.error(error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -163,9 +173,25 @@ export default function ContactSection() {
 
           <AnimatedSection delay={0.12} direction="left">
             <form
+              name={NETLIFY_MEMORY_FORM_NAME}
+              method="POST"
+              data-netlify="true"
+              netlify-honeypot="bot-field"
               onSubmit={handleSubmit}
               className="border border-[#d8cda8] bg-[#f6f3ea] p-5 md:p-6"
             >
+              <input
+                type="hidden"
+                name="form-name"
+                value={NETLIFY_MEMORY_FORM_NAME}
+              />
+              <p className="hidden">
+                <label>
+                  Não preencha este campo:
+                  <input name="bot-field" tabIndex={-1} autoComplete="off" />
+                </label>
+              </p>
+
               <div className="grid gap-4 md:grid-cols-2">
                 <div>
                   <label
@@ -176,6 +202,7 @@ export default function ContactSection() {
                   </label>
                   <Input
                     id="memory-name"
+                    name="name"
                     value={formData.name}
                     onChange={event =>
                       setFormData({ ...formData, name: event.target.value })
@@ -193,6 +220,7 @@ export default function ContactSection() {
                   </label>
                   <Input
                     id="memory-email"
+                    name="email"
                     type="email"
                     value={formData.email}
                     onChange={event =>
@@ -211,6 +239,7 @@ export default function ContactSection() {
                   </label>
                   <Input
                     id="memory-phone"
+                    name="phone"
                     value={formData.phone}
                     onChange={event =>
                       setFormData({ ...formData, phone: event.target.value })
@@ -227,6 +256,7 @@ export default function ContactSection() {
                   </label>
                   <Input
                     id="memory-relation"
+                    name="relation"
                     placeholder="ex-mirim, familiar, instrutor, parceiro"
                     value={formData.relation}
                     onChange={event =>
@@ -247,6 +277,7 @@ export default function ContactSection() {
                   </label>
                   <Input
                     id="memory-year"
+                    name="approxYear"
                     placeholder="ex.: turma 2024, desfile de 7 de setembro"
                     value={formData.approxYear}
                     onChange={event =>
@@ -267,6 +298,7 @@ export default function ContactSection() {
                   </label>
                   <Textarea
                     id="memory-message"
+                    name="message"
                     rows={6}
                     placeholder="Conte a lembrança, indique fonte, pessoa, turma ou contexto da foto."
                     value={formData.message}
@@ -285,6 +317,8 @@ export default function ContactSection() {
               <label className="mt-5 flex gap-3 text-sm leading-6 text-slate-700">
                 <input
                   type="checkbox"
+                  name="authorized"
+                  value="sim"
                   checked={formData.authorized}
                   onChange={event =>
                     setFormData({
@@ -314,4 +348,3 @@ export default function ContactSection() {
     </section>
   );
 }
-
