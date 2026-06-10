@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Guarda Mirim de Salinas">
+  <rect width="128" height="128" rx="24" fill="#193f8f"/>
+  <path d="M17 91 64 18l47 73H89L64 52 39 91Z" fill="#f2b33d"/>
+  <circle cx="64" cy="77" r="19" fill="#ffffff"/>
+  <text x="64" y="84" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" font-weight="800" fill="#193f8f">GM</text>
+</svg>
